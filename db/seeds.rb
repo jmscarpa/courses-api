@@ -139,6 +139,7 @@ data.each do |info|
   Recommendation.create(
     name: info[:title],
     description: info[:description],
-    category: Category.find_or_create_by(name: info[:kind])
+    category: Category.find_or_create_by(name: info[:kind]),
+    image_url: info[:imageUrl]
   )
 end
