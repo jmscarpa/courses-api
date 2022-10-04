@@ -1,4 +1,8 @@
 class Recommendation < ApplicationRecord
+
+  validates :name, presence: true
+  validates :name, uniqueness: true
+
   belongs_to :category
 
   def image_url
