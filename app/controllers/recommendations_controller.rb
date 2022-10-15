@@ -1,7 +1,8 @@
 class RecommendationsController < ApplicationController
 
   def index
-    @recommendations = Recommendation.all
+    @recommendations = Recommendation.includes(:category).all
+    @recommendations.where!(category_id: params[:category]) if params[:category].present?
   end
   
   def show
