@@ -143,3 +143,5 @@ data.each do |info|
     image_url: info[:imageUrl]
   )
 end
+
+User.create(name: "João Scarpa", email: "joao.scarpa@gmail.com", password: '123456')

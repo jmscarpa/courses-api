@@ -1,5 +1,7 @@
 class RecommendationsController < ApplicationController
 
+  before_action :authenticate!
+
   def index
     @recommendations = Recommendation.includes(:category).all
     @recommendations.where!(category_id: params[:category]) if params[:category].present?
