@@ -1,14 +1,11 @@
 class Recommendation < ApplicationRecord
-
+  belongs_to :category
   has_many :comments
 
-  validates :name, presence: true
-  validates :name, uniqueness: true
+  def cover_url
+    return self[:cover_url] if self[:cover_url].present?
 
-  belongs_to :category
-
-  def image_url
-    return super if self[:image_url].present?
-    "https://rafaturis.com.br/wp-content/uploads/2014/01/default-placeholder.png"
+    'https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg'
   end
+
 end

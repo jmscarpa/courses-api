@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_20_131143) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_03_224501) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,38 +21,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_20_131143) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "recommendation_id", null: false
-    t.text "content", null: false
+    t.string "content", null: false
+    t.integer "recommendation_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recommendation_id"], name: "index_comments_on_recommendation_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "recommendations", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.integer "category_id"
+    t.string "title", null: false
+    t.text "description"
+    t.string "cover_url"
+    t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image_url"
+    t.index ["category_id"], name: "index_recommendations_on_category_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "name", default: "", null: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.string "api_key", default: "", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  add_foreign_key "comments", "recommendations"
-  add_foreign_key "comments", "users"
+  add_foreign_key "recommendations", "categories"
 end

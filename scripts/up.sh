@@ -28,5 +28,5 @@ docker compose exec app rails db:create db:migrate db:seed
 
 echo " "
 echo -e "${COLOR_YELLOW}========> Starting service...${COLOR_CLEAN}"
-docker logs recommendations-api -n 8
-docker attach recommendations-api
+docker logs recommendations-api-v2 -n 8
+docker attach recommendations-api-v2

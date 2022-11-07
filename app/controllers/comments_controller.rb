@@ -1,17 +1,13 @@
 class CommentsController < ApplicationController
 
-  before_action :authenticate!
-
   def create
     recommendation = Recommendation.find(params[:recommendation_id])
-    @comment = recommendation.comments.create(comment_params)
-    @comment.user = current_user
-    render json: { error: @comment.errors.full_messages.first }, status: 422 unless @comment.save
+    comment = recommendation.comments.new(content: params[:content])
+    if comment.save
+      render json: {}, status: 201
+    else
+      render json: { error: comment.error.full_messages.first }, status: 422
+    end
   end
-  
-  def comment_params
-    params.permit(:content)
-  end
-
 
 end
